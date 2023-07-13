@@ -1,10 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'bootstrap/base.html' %}
 
-</body>
-</html>
+{% block title %}Coffee and Wifi{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet"
+          href="{{ url_for('.static', filename='/css/styles.css') }}">
+{% endblock %}
+{% block content %}
+    <div class="jumbotron text-center">
+        <div class="container">
+            <h1 class="display-4">☕️ Coffee & Wifi 💻</h1>
+            <p class="lead">Want to work in a cafe but need power and wifi?</p>
+            <hr class="my-4">
+            <p>You've found the right place! Checkout my collection of cafes with power socket availability and
+                wifi quality.</p>
+            {% for item in hotspots %}
+                <table class="table table-bordered" style="font-size: 24px;">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Wifi Quality</th>
+                        <th scope="col">Power Rating</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.wifi_quality }}</td>
+                        <td>{{ item.power_rating }}</td>
+                    </tr>
+                    </tbody>
+
+            {% endfor %}
+{#            <a class="btn btn-warning btn-lg" href="{{ url_for('view_hotspot') }}" role="button">Show Me!</a>#}
+        </div>
+    </div>
+
+{% endblock %}

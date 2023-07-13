@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
 
-</body>
-</html>
+{% block title %}Add A New Cafe{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet"
+          href="{{ url_for('.static', filename='/css/styles.css') }}">
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-8">
+                <form action="{{ url_for('add') }}" method="post">
+                    <h1>Add a new cafe into the database</h1>
+                    {{ form.hidden_tag() }}
+                    {{ wtf.quick_form(form, novalidate=True) }}
+
+                </form>
+                <p class="space-above"><a href="{{ url_for('index') }}">See all cafes</a></p>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
