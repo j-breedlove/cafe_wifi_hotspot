@@ -14,26 +14,43 @@
             <hr class="my-4">
             <p>You've found the right place! Checkout my collection of cafes with power socket availability and
                 wifi quality.</p>
-            {% for item in hotspots %}
-                <table class="table table-bordered" style="font-size: 24px;">
-                    <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Wifi Quality</th>
-                        <th scope="col">Power Rating</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flashed-messages-delete alert alert-danger alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <table class="table table-bordered" style="font-size: 24px;">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Wifi Quality</th>
+                    <th scope="col">Power Rating</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in hotspots %}
+
                     <tr>
                         <td>{{ item.name }}</td>
                         <td>{{ item.wifi_quality }}</td>
                         <td>{{ item.power_rating }}</td>
+                        <td>
+                            <form action="{{ url_for('delete', hotspot_id=item.id) }}" method="POST">
+                                <button class="btn btn-danger btn-lg" type="submit">Delete</button>
+                            </form>
+                        </td>
                     </tr>
-                    </tbody>
 
-            {% endfor %}
-{#            <a class="btn btn-warning btn-lg" href="{{ url_for('view_hotspot') }}" role="button">Show Me!</a>#}
-        </div>
-    </div>
+                {% endfor %}
+                <div class="container">
+                    <a class="btn btn-warning btn-lg" href="{{ url_for('add') }}" role="button">Add Cafe!</a>
+                </div>
+                <br>
+                </tbody>
 
 {% endblock %}
