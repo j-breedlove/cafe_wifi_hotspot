@@ -7,7 +7,7 @@ A Flask web application that allows users to enter various wifi hotspots by name
 
 1. Clone the repository:
     ```
-    git clone https://github.com/yourusername/coffee-and-wifi.git
+    git clone https://github.com/j-breedlove/coffee-and-wifi.git
     ```
 2. Change into the project directory:
     ```
